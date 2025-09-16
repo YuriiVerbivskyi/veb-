@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Список місць{% endblock %}
+
+{% block content %}
+<h2>Мої улюблені місця</h2>
+
+{% for place in places %}
+<div class="place-preview">
+    <img src="{% static 'img/' %}{{ place.photo }}" alt="{{ place.name }}" width="150">
+    <h3><a href="{% url 'place_detail' forloop.counter0 %}">{{ place.name }}</a></h3>
+    <p><strong>Тип:</strong> {{ place.type }}</p>
+    <p><strong>Локація:</strong> {{ place.location|default:"Secret place👀" }}</p>
+    <p><strong>Рейтинг:</strong>
+        {% for i in "12345"|slice:":place.rating"|make_list %}⭐{% endfor %}
+    </p>
+    <p><strong>Дата:</strong> {{ place.created_at }}</p>
+    <p>{{ place.description|truncatewords:7 }}</p>
+</div>
+{% empty %}
+<p>Поки що немає жодного місця</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Головна{% endblock %}
+{% block content %}
+<form action="{% url 'random_place' %}" method="get">
+    <button>Куди піти сьогодні?</button>
+</form>
+{% endblock %}

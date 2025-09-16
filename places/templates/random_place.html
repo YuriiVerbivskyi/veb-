@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Сьогодні вам варто піти сюди:</h2>
+
+{% if place %}
+    <div class="place-preview">
+        <h3>{{ place.name }}</h3>
+        <p>{{ place.description }}</p>
+        {% if place.image %}
+            <img src="{{ place.image }}" alt="{{ place.name }}" style="max-width: 300px;">
+        {% endif %}
+    </div>
+{% else %}
+    <p>Поки що немає жодного місця</p>
+{% endif %}
+{% endblock %}
