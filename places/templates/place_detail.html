@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}  {# <- обов’язково додати! #}
+
+{% block title %}{{ place.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ place.name }}</h2>
+<img src="{% static 'img/' %}{{ place.photo }}" alt="{{ place.name }}" width="200">
+<p><strong>Тип:</strong> {{ place.type }}</p>
+<p><strong>Локація:</strong> {{ place.location|default:"Secret place👀" }}</p>
+<p><strong>Рейтинг:</strong>
+    {% for i in "12345"|slice:":place.rating"|make_list %}⭐{% endfor %}
+</p>
+<p><strong>Дата:</strong> {{ place.created_at }}</p>
+<p><strong>Опис:</strong> {{ place.description }}</p>
+{% endblock %}
