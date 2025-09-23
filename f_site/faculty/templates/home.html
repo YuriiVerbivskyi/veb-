@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ home.name|default:"Факультет" }} - Головна{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <h1 class="display-4 mb-4">
+            <i class="fas fa-university me-3"></i>
+            {% if home %}{{ home.name }}{% else %}Факультет {% endif %}
+        </h1>
+        <div class="hero-buttons mt-4">
+            <a href="{% url 'specialities' %}" class="btn btn-light btn-lg me-3">
+                <i class="fas fa-graduation-cap me-2"></i>Спеціальності
+            </a>
+            <a href="{% url 'department_list' %}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-building me-2"></i>Кафедри
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container content-section">
+    {% if home %}
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="section-title">
+                        <i class="fas fa-info-circle me-2"></i>Про факультет
+                    </h2>
+                    <p class="lead">{{ home.content|linebreaks }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <i class="fas fa-address-book me-2"></i>Контактна інформація
+                </div>
+                <div class="card-body">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <div>
+                                <strong>Телефон</strong><br>
+                                <a href="tel:{{ home.phone }}">{{ home.phone }}</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope contact-icon"></i>
+                            <div>
+                                <strong>Email</strong><br>
+                                <a href="mailto:{{ home.email }}">{{ home.email }}</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <div>
+                                <strong>Адреса</strong><br>
+                                {{ home.address }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-warning text-center">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        Інформація про факультет ще не додана. Будь ласка, зверніться до адміністратора.
+    </div>
+    {% endif %}
+
+    <div class="row mt-5">
+        <div class="col-md-6 mb-4">
+            <div class="card feature-card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Наші спеціальності</h4>
+                    <p>Ознайомтеся з усіма освітніми програмами та спеціальностями факультету</p>
+                    <a href="{% url 'specialities' %}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Переглянути спеціальності
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card feature-card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="feature-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h4>Наші кафедри</h4>
+                    <p>Дізнайтеся більше про структуру факультету та викладацький склад</p>
+                    <a href="{% url 'department_list' %}" class="btn btn-primary">
+                        <i class="fas fa-arrow-right me-1"></i>Переглянути кафедри
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
